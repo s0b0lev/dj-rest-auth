@@ -135,7 +135,7 @@ class SocialLoginSerializer(serializers.Serializer):
                 token = client.get_access_token(code)
             except OAuth2Error as ex:
                 raise serializers.ValidationError(
-                    _('Failed to exchange code for access token')
+                    _('Failed to exchange code for access token. Error: {0}').format(str(ex)),
                 ) from ex
             access_token = token['access_token']
             tokens_to_parse = {'access_token': access_token}
